@@ -1,0 +1,62 @@
+﻿@model UserManagerDemo.Models.Student // Khai báo Model mà View này sẽ sử dụng
+
+@{
+    ViewData["Title"] = "学生追加sdfds"; // Tiêu đề trang
+}
+
+<h1>学生追加</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        @*
+            Sử dụng Html.BeginForm hoặc <form asp-action="Create" method="post">
+            để tạo form. asp-action và asp-controller là các tag helper của ASP.NET Core
+            giúp tạo URL một cách an toàn.
+        *@
+        <form asp-action="Create" method="post">
+            @*
+                asp-validation-summary hiển thị tất cả các lỗi validation của model.
+                "All" hiển thị tất cả lỗi, "ModelOnly" chỉ hiển thị lỗi không gắn với trường cụ thể.
+            *@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" class="form-control">
+                    <option value="">-- 性別 --</option>
+                    <option value="Male">男</option>
+                    <option value="Female">女</option>
+                    <option value="Other">その他</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="学生追加" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">戻る</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
